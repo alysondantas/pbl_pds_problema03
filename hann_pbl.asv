@@ -1,0 +1,7 @@
+function [wind ] = hann_pbl(windowLength)
+    N = windowLength - 1;
+    w = 0:N;
+    W(n) = 0.5*(1 - cos(2*pi*w(n)/N));
+%     num = linspace(0,N,windowLength);
+%     wind =  0.5*(1 - cos(2*pi*num/N));
+end
