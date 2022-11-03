@@ -1,0 +1,19 @@
+clc;
+clear;
+close all;
+
+M = 20;
+
+[w,W] = hann_pbl(M);
+
+axis([xlim([0,1400 ]) ylim([0 16])]);
+
+stem(W,w);
+
+figure;
+
+%freqz(w,0.5, 2^16, W)
+freqz(w);
+
+%[w2,W2] = bartlett_pbl(20);
+%stem(W2,w2);
