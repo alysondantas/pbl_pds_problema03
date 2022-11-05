@@ -4,7 +4,7 @@ close all;
 
 M = 52;
 
-[w,W] = hamming_pbl(M);
+[w,W] = hann_pbl(M);
 
 stem(W,w);
 
