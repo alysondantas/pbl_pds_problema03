@@ -4,16 +4,15 @@ close all;
 % Converter Herts para Rad = w = 2*pi*f/fs (fs = frequência de amostragem)
 % =============== Parâmetros do FIltro Passa-Baixas Ideal =========
 freq_s = 8000; % frequência de amostragem
-fp = 1500; % frequência limite da banda de passagem 
+fp = 1800; % frequência limite da banda de passagem 
 fs = 2000; % frequência limite da banda de transição
 fc = (fp + fs)/2; % frequência de corte (em Hertz)
-wc = (2*pi*fc)/freq_s; % frequência de corte (em rad)
-At_p = 0.1; % atenuação máxima na banda de passagem (em dB)
-At_p = 50; % atenuação mínima na banda de rejeição (em dB)
+%wc = (2*pi*fc)/freq_s; % frequência de corte (em rad)
 % =============== Parâmetros da janela =================
 ws = (2*pi*fs)/freq_s;
-wp = (2*pi*fp)/freq_s;  
-Bw = (ws - wp)/(2*pi); % largura do lóbulo principal 
+wp = (2*pi*fp)/freq_s;
+wc = (ws+wp)/2;
+Bw = abs((ws - wp))/(2*pi); % largura do lóbulo principal 
 N  = ceil(3.3/(Bw));   % Comprimento da janela de Hamming
 M  = N-1;              % Ordem do Filtro
 % =============== Cálculo do Filtro ====================
@@ -23,12 +22,19 @@ stem(hd);
 title("Resposta ao impulso ideal");
 figure;
 % Equação da janela
-wn = 0.54 - 0.46*cos((2*pi*n)/(M));
+wn = 0.54 - 0.46*cos((2*pi*n)/M);
+stem(hd);
+title("Janela h[n]");
+figure;
 freqz(wn);
 figure;
 % Truncamento da resposta ao impulso ideal.
 hn = hd.*wn;
-[f,Y] = my_fft2(n,hn,freq_s);
-%[h, f] = freqz(hn,n,freq_s);
-plot(f,Y);
-
+stem(hd);
+title("Respota ao impulso truncada(Magnitude)");
+figure;
+[h,f] = freqz(hn);
+plot(f*freq_s/(2*pi), 20*log10(abs(h)));
+Hn = fft(hn);
+figure;
+plot(n,abs(Hn));
