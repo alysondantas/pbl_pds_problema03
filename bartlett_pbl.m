@@ -1,7 +1,7 @@
 function [w,W] = bartlett_pbl(L)
-    N = L - 1;
+    N = L;
     W = 0:N;
-    
-    w = 2*(0:(N)/2)/(N);
+    a = [0:((N/2)+1)];
+    w = 2*a/(N);
     w = [w w((N)/2:-1:1)]';
 end

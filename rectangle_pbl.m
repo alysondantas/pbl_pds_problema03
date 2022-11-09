@@ -1,5 +1,5 @@
 function [w,W] = rectangle_pbl(L)
-    N = L - 1;
+    N = L;
     W = 0:N;
-    w = ones(L,1);
+    w = ones(L+1,1);
 end
