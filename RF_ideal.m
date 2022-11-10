@@ -1,4 +1,4 @@
-function hd = PF_ideal(wc1,wc2,M)
+function hd = RF_ideal(wc1,wc2,M)
 
 %  Filtro passa alta ideal
 % ----------------------------
@@ -9,5 +9,5 @@ function hd = PF_ideal(wc1,wc2,M)
 alpha = M/2;
 n     = [0:M];
 m     = n-alpha+eps;  % eps = numero muito pequeno para evitar divisao por 0
-%hd    = (sin(wc2*m)./(pi*m)) + ((sin(pi*m)./(pi*m)) - (sin(wc1*m)./(pi*m)));
-hd    = (sin(wc2*m)./(pi*m)) - (sin(wc1*m)./(pi*m));
+%hd    = (sin(wc1*m)./(pi*m)) - (sin(wc2*m)./(pi*m));
+hd    = (sin(wc1*m)./(pi*m)) + ((sin(pi*m)./(pi*m)) - (sin(wc2*m)./(pi*m)));
